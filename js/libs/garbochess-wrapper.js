@@ -1,7 +1,8 @@
-define ([
+define ('GarboWrapper',[
+	'underscore',
 	'garbochess'
-], function (GarboChess) {
-
+], function (_, GarboChess) {
+	var isInited = false;
 	var GarboWrapper = {
 
 		modulePropery: 1,
@@ -10,6 +11,7 @@ define ([
 			var backgroundEngine = new Worker("js/libs/garbochess.js");
 
 			backgroundEngine.onmessage = function (e) {
+				console.log("garbo wrapper received: " + e.data);
 				if (e.data.match("^pv") == "pv") {
 					var pv = e.data.substr(3, e.data.length - 3);
 					console.log("pv " + pv);
@@ -25,15 +27,20 @@ define ([
 			};
 		},
 		sendError: function (e) {
-				alert("Error from garbochess: " + e.message);
+			alert("Error from garbochess: " + e.message);
 		},
 		setFen: function(fenString) {
+			if(!isInited) { this.init(); }
 			backgroundEngine.postMessage("position " + fenString);
 		},
 		analyze: function() {
+			if(!isInited) { this.init(); }
 			backgroundEngine.postMessage("analyze");
 		}
-	};
+		reset: function () {
+			backgroundEngine.terminate();
+			isInited = false;
+		}
 
 	return GarboWrapper;
 

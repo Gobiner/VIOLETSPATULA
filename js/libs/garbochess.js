@@ -225,6 +225,13 @@ function Search(finishMoveCallback, maxPly, finishPlyCallback) {
             i--;
         }
 
+		GenerateValidMoves().forEach(function (move) {
+			postMessage("movedata " + JSON.stringify({
+				"move": move,
+				readable: FormatMove(move),
+				score: ScoreMove(move) }));
+		});
+
         if (g_hashTable[g_hashKeyLow & g_hashMask] != null) {
             bestMove = g_hashTable[g_hashKeyLow & g_hashMask].bestMove;
         }
@@ -2492,7 +2499,7 @@ function FinishMoveLocalTesting(bestMove, value, timeTaken, ply) {
 
 var needsReset = true;
 self.onmessage = function (e) {
-    console.log(e.data);
+    console.log("garbochess received: " + e.data);
     if (e.data == "go" || needsReset) {
         ResetGame();
         needsReset = false;
