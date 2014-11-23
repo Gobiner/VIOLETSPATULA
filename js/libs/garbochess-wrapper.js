@@ -3,6 +3,7 @@ define ('GarboWrapper',[
 	'garbochess'
 ], function (_, GarboChess) {
 	var isInited = false;
+	var analysisCallback = function() { };
 	var GarboWrapper = {
 
 		modulePropery: 1,
@@ -18,6 +19,9 @@ define ('GarboWrapper',[
 				} else if (e.data.match("^message") == "message") {
 					var message = e.data.substr(8, e.data.length - 8);
 					console.log("message " + message);
+				} else if (e.data.match("^analysis") == "analysis") {
+					var data = JSON.parse(e.data.substr(9, e.data.length - 9));
+					analysisCallback(data);
 				} else if (e.data.match("^[a-h][1-8]{2}[bqnr]?") !== null) {
 					var move = e.data;
 					console.log("move " + move);
@@ -36,12 +40,15 @@ define ('GarboWrapper',[
 		analyze: function() {
 			if(!isInited) { this.init(); }
 			backgroundEngine.postMessage("analyze");
-		}
+		},
 		reset: function () {
 			backgroundEngine.terminate();
 			isInited = false;
+		},
+		onAnalysis: function (callback) {
+			analysisCallback = callback;
 		}
-
+	}
 	return GarboWrapper;
-
+	
 });
