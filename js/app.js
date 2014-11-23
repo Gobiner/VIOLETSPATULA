@@ -12,8 +12,6 @@ require([
         showNotation: true
     };
 
-    console.log(GarboWrapper.moduleProperty);
-
     var board = new ChessBoard('board', config);
     var inputelm = $("#fen-input");
 
@@ -22,11 +20,13 @@ require([
 
 
         var input = inputelm.val();
-        var FENregex = new RegExp("/^\\s*([rnbqkpRNBQKP1-8]+\/){7}([rnbqkpRNBQKP1-8]+)\\s[bw]\\s(-|K?Q?k?q?)\\s(-|[a-h‌​][36])/");
+        var FENregex = new RegExp("^\\s*([rnbqkpRNBQKP1-8]+\/){7}([rnbqkpRNBQKP1-8]+)\\s[bw]\\s(-|K?Q?k?q?)\\s(-|[a-h‌​][36])");
         if (_.isEmpty(input)){
             inputelm.css("background", "red");
         }else if(input.match(FENregex)){
             board.position(input, true);
+			GarboWrapper.setFen(input);
+			GarboWrapper.analyze();
         }else {
             inputelm.css("background", "red");
         }
@@ -40,5 +40,8 @@ require([
         }
 
     });
-
+	
+	GarboWrapper.onAnalysis(function (moves) {
+		console.log(moves);
+	});
 });
