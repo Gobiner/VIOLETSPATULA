@@ -5,6 +5,10 @@ require.config({
         },
         'bootstrap': {
             deps: ['jquery']
+        },
+        'garbochess-wrapper': {
+            deps: ['garbochess'],
+            exports: 'GarboWrapper'
         }
     },
     paths: {

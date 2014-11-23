@@ -1,14 +1,16 @@
-define([
+require([
     'jquery',
     'underscore',
+    'garbochess-wrapper',
     'chessboard',
     'garbochess',
-	'garbochess-wrapper',
     'bootstrap'
-], function ($, _, Board, Garbochess, Bootstrap) {
+], function ($, _, GarboWrapper, Board, Garbochess, Bootstrap) {
     var board = new ChessBoard('board', {
         draggable: true,
         dropOffBoard: 'trash',
         sparePieces: true
     });
+    var wrapper = new GarboWrapper();
+    wrapper.test();
 });
