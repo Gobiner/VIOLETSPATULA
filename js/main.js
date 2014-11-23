@@ -14,6 +14,7 @@ require.config({
         'chessboard': 'libs/chessboard',
         'garbochess': 'libs/garbochess',
 		'garbochess-wrapper': 'libs/garbochess-wrapper',
+        'chess'     : 'libs/chess',
         'jquery'    : 'libs/jquery',
         'bootstrap' : 'libs/bootstrap',
         'underscore': 'libs/underscore',
