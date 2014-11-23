@@ -45,6 +45,7 @@ require([
     };
 
     var board = new ChessBoard('board', config);
+    inputelm.val(board.fen());
 
     var updateStatus = function() {
         var status = '';
@@ -103,6 +104,7 @@ require([
     $("#reset-position-btn").click(function (event) {
         board.start(true);
         game.reset();
+        inputelm.val(board.fen());
     });
 	
 	GarboWrapper.onAnalysis(function (moves) {
