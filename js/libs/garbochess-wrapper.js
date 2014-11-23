@@ -4,41 +4,39 @@ define ([
 ], function (_, GarboChess) {
 	var isInited = false;
 	var analysisCallback = function() { };
+	var backgroundEngine;
 	var GarboWrapper = {
 
 		moduleProperty: 1,
 		init: function () {
-
-			var backgroundEngine = new Worker("js/libs/garbochess.js");
-
+		
+			backgroundEngine = new Worker("js/libs/garbochess.js");
+			isInited = true;
+			
 			backgroundEngine.onmessage = function (e) {
-				console.log("garbo wrapper received: " + e.data);
 				if (e.data.match("^pv") == "pv") {
 					var pv = e.data.substr(3, e.data.length - 3);
-					console.log("pv " + pv);
 				} else if (e.data.match("^message") == "message") {
 					var message = e.data.substr(8, e.data.length - 8);
-					console.log("message " + message);
 				} else if (e.data.match("^analysis") == "analysis") {
 					var data = JSON.parse(e.data.substr(9, e.data.length - 9));
 					analysisCallback(data);
 				} else if (e.data.match("^[a-h][1-8]{2}[bqnr]?") !== null) {
 					var move = e.data;
-					console.log("move " + move);
 				} else {
-					this.sendError(e);
+					GarboWrapper.sendError(e);
 				}
 			};
 		},
 		sendError: function (e) {
-			alert("Error from garbochess: " + e.message);
+			console.error("Error from garbochess: " + e);
 		},
 		setFen: function(fenString) {
-			if(!isInited) { this.init(); }
+			if(!isInited) { GarboWrapper.init(); }
 			backgroundEngine.postMessage("position " + fenString);
 		},
 		analyze: function() {
-			if(!isInited) { this.init(); }
+			if(!isInited) { GarboWrapper.init(); }
 			backgroundEngine.postMessage("analyze");
 		},
 		reset: function () {

@@ -225,12 +225,17 @@ function Search(finishMoveCallback, maxPly, finishPlyCallback) {
             i--;
         }
 
-		GenerateValidMoves().forEach(function (move) {
-			postMessage("movedata " + JSON.stringify({
+		
+		var moves = GenerateValidMoves().map(function (move) {
+			MakeMove(move);
+			var ret = {
 				"move": move,
 				readable: FormatMove(move),
-				score: ScoreMove(move) }));
+				score: g_toMove == colorWhite ? Evaluate() / 1000 : Evaluate() / -1000};
+			UnmakeMove(move);
+			return ret;
 		});
+		postMessage("analysis " + JSON.stringify(moves));
 
         if (g_hashTable[g_hashKeyLow & g_hashMask] != null) {
             bestMove = g_hashTable[g_hashKeyLow & g_hashMask].bestMove;
