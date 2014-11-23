@@ -27,9 +27,10 @@ require([
                 return 'snapback';
             } else {
                 inputelm.val(ChessBoard.objToFen(newPos));
-				GarboWrapper.setFen(ChessBoard.objToFen(newPos));
+				GarboWrapper.setFen(game.fen());
 				GarboWrapper.analyze();
             }
+            console.log(game.fen());
             updateStatus();
 
         },
@@ -82,6 +83,7 @@ require([
 
 
         var input = inputelm.val();
+        // TODO: Add support for full FEN String I.E. rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq c3 0 1
         var FENregex = new RegExp("^\\s*([rnbqkpRNBQKP1-8]+\/){7}([rnbqkpRNBQKP1-8]+)\\s[bw]\\s(-|K?Q?k?q?)");
         if (_.isEmpty(input)){
             inputelm.css("background-color", "white");
