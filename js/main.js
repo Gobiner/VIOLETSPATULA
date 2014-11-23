@@ -7,8 +7,7 @@ require.config({
             deps: ['jquery']
         },
         'garbochess-wrapper': {
-            deps: ['garbochess'],
-            exports: 'GarboWrapper'
+            deps: ['garbochess']
         }
     },
     paths: {

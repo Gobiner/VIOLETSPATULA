@@ -11,6 +11,6 @@ require([
         dropOffBoard: 'trash',
         sparePieces: true
     });
-    var wrapper = new GarboWrapper();
-    wrapper.test();
+    console.log(GarboWrapper.modulePropery);
+
 });

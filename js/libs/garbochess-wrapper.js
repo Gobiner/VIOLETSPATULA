@@ -1,4 +1,4 @@
-define ('GarboWrapper',[
+define ([
 	'garbochess'
 ], function (GarboChess) {
 
