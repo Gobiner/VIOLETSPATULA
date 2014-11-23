@@ -5,6 +5,10 @@ define([
     'garbochess',
 	'garbochess-wrapper',
     'bootstrap'
-], function ($, _, ChessBoard, Garbochess) {
-    console.log("Greetings internet users");
+], function ($, _, Board, Garbochess, Bootstrap) {
+    var board = new ChessBoard('board', {
+        draggable: true,
+        dropOffBoard: 'trash',
+        sparePieces: true
+    });
 });
