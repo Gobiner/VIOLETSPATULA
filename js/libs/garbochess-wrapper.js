@@ -1,4 +1,4 @@
-define ('GarboWrapper',[
+define ([
 	'underscore',
 	'garbochess'
 ], function (_, GarboChess) {
@@ -6,7 +6,7 @@ define ('GarboWrapper',[
 	var analysisCallback = function() { };
 	var GarboWrapper = {
 
-		modulePropery: 1,
+		moduleProperty: 1,
 		init: function () {
 
 			var backgroundEngine = new Worker("js/libs/garbochess.js");
