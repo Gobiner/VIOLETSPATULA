@@ -16,19 +16,21 @@ require([
     var inputelm = $("#fen-input");
 
     console.log(board.fen());
-    inputelm.change(function (event) {
+    inputelm.on('input', function (event) {
 
 
         var input = inputelm.val();
-        var FENregex = new RegExp("^\\s*([rnbqkpRNBQKP1-8]+\/){7}([rnbqkpRNBQKP1-8]+)\\s[bw]\\s(-|K?Q?k?q?)\\s(-|[a-h‌​][36])");
+        var FENregex = new RegExp("^\\s*([rnbqkpRNBQKP1-8]+\/){7}([rnbqkpRNBQKP1-8]+)\\s[bw]\\s(-|K?Q?k?q?)");
         if (_.isEmpty(input)){
-            inputelm.css("background", "red");
+            inputelm.css("background-color", "white");
         }else if(input.match(FENregex)){
             board.position(input, true);
+            inputelm.css("background-color", "white");
+            inputelm.val("");
 			GarboWrapper.setFen(input);
 			GarboWrapper.analyze();
         }else {
-            inputelm.css("background", "red");
+            inputelm.css("background", "rgba(255, 0, 0, 0.5)");
         }
     });
     $("#fen-submit").click(function (event) {
