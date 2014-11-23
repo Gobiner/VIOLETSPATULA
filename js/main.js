@@ -10,6 +10,7 @@ require.config({
     paths: {
         'chessboard': 'libs/chessboard',
         'garbochess': 'libs/garbochess',
+		'garbochess-wrapper': 'libs/garbochess-wrapper',
         'jquery'    : 'libs/jquery',
         'bootstrap' : 'libs/bootstrap',
         'underscore': 'libs/underscore',
