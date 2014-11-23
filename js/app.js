@@ -6,11 +6,22 @@ require([
     'garbochess',
     'bootstrap'
 ], function ($, _, GarboWrapper, Board, Garbochess, Bootstrap) {
-    var board = new ChessBoard('board', {
+    var config = {
         draggable: true,
-        dropOffBoard: 'trash',
-        sparePieces: true
+        position: 'start',
+        showNotation: true
+    };
+
+    var board = new ChessBoard('board', config);
+
+    $("#fen-submit").click(function (event) {
+        var input = $("#fen-input").val();
+        if(_.isEmpty(input)){
+            alert("No FEN Supplied");
+        }else {
+            board.position(input, true);
+        }
+
     });
-    console.log(GarboWrapper.modulePropery);
 
 });

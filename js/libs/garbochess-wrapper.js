@@ -35,7 +35,6 @@ define ([
 		}
 	};
 
-	console.log(GarboWrapper);
 	return GarboWrapper;
 
 });

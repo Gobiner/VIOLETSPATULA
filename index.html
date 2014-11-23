@@ -9,9 +9,26 @@
 </head>
 <body>
     <div class="container">
-        <h1>Hello Chess World</h1>
 
-        <div id="board"></div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div id="board"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="input-group">
+                    <label class="sr-only" for="fen-input">FEN</label>
+                    <div class="input-group-addon">FEN</div>
+                    <input type="text" class="form-control" id="fen-input" placeholder="Input FEN">
+                    <button class="btn btn-default" id="fen-submit">Import</button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
     </div>
 
 
