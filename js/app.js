@@ -26,7 +26,7 @@ require([
             if (move === null) {
                 return 'snapback';
             } else {
-                inputelm.val(ChessBoard.objToFen(newPos));
+                inputelm.val(game.fen());
 				GarboWrapper.setFen(game.fen());
 				GarboWrapper.analyze();
             }
@@ -103,7 +103,12 @@ require([
     });
 	
 	GarboWrapper.onAnalysis(function (moves) {
-		console.log(moves);
+		moves.sort(function (a, b) { return b.score - a.score; });
+		var output = "";
+		moves.forEach(function (x) {
+			output += "[" + x.score + "] " + x.readable + "\n";
+		});
+		$("#garbo-output").val(output);
 	});
 
 });
