@@ -27,6 +27,8 @@ require([
                 return 'snapback';
             } else {
                 inputelm.val(ChessBoard.objToFen(newPos));
+				GarboWrapper.setFen(ChessBoard.objToFen(newPos));
+				GarboWrapper.analyze();
             }
             updateStatus();
 
@@ -91,15 +93,6 @@ require([
         }else {
             inputelm.css("background", "rgba(255, 0, 0, 0.5)");
         }
-    });
-    $("#fen-submit").click(function (event) {
-        var input = $("#fen-input").val();
-        if(_.isEmpty(input)){
-            alert("No FEN Supplied");
-        }else {
-            board.position(input, true);
-        }
-
     });
     $("#reset-position-btn").click(function (event) {
         board.start(true);
