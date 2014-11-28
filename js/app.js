@@ -103,7 +103,7 @@ require([
     });
 	
 	GarboWrapper.onAnalysis(function (moves) {
-		moves.sort(function (a, b) { return b.score - a.score; });
+		moves.sort(function (a, b) { return (game.turn() == "w" ? 1 : -1) * (b.score - a.score); });
 		var output = "";
 		moves.forEach(function (x) {
 			output += "[" + x.score + "] " + x.readable + "\n";
