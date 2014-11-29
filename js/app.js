@@ -8,6 +8,7 @@ require([
     'bootstrap'
 ], function ($, _, GarboWrapper, Board, Engine, Garbochess, Bootstrap) {
     var inputelm = $("#fen-input");
+	var analysisCounter = 0;
     var game = new Chess();
     var config = {
         draggable: true,
@@ -81,7 +82,6 @@ require([
 
     inputelm.on('input', function (event) {
 
-
         var input = inputelm.val();
         // TODO: Add support for full FEN String I.E. rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR b KQkq c3 0 1
         var FENregex = new RegExp("^\\s*([rnbqkpRNBQKP1-8]+\/){7}([rnbqkpRNBQKP1-8]+)\\s[bw]\\s(-|K?Q?k?q?)");
@@ -96,6 +96,7 @@ require([
             inputelm.css("background", "rgba(255, 0, 0, 0.5)");
         }
     });
+	
     $("#reset-position-btn").click(function (event) {
         board.start(true);
         game.reset();
@@ -104,7 +105,8 @@ require([
 	
 	GarboWrapper.onAnalysis(function (moves) {
 		moves.sort(function (a, b) { return (game.turn() == "w" ? 1 : -1) * (b.score - a.score); });
-		var output = "";
+		analysisCounter += 1;
+		var output = analysisCounter + ": " + new Date() + "\n";
 		moves.forEach(function (x) {
 			output += "[" + x.score + "] " + x.readable + "\n";
 		});

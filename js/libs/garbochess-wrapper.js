@@ -32,7 +32,10 @@ define ([
 			console.error("Error from garbochess: " + e);
 		},
 		setFen: function(fenString) {
-			if(!isInited) { GarboWrapper.init(); }
+			if(backgroundEngine) {
+				backgroundEngine.terminate();	
+			}
+			GarboWrapper.init();
 			backgroundEngine.postMessage("position " + fenString);
 		},
 		analyze: function() {

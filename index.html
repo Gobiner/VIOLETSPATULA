@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -12,39 +13,28 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6 col-md-offset-2">
                 <div id="board"></div>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-default" id="reset-position-btn">Starting Position</button>
-            </div>
+				<div class="input-group">
+					<button class="btn btn-default" id="reset-position-btn">Starting Position</button>
+            	</div>
+	            <div class="input-group">
+	                <label class="sr-only" for="fen-input">FEN</label>
+	                <div class="input-group-addon">FEN</div>
+	                <input type="text" class="form-control" id="fen-input" placeholder="Input FEN">
+	            </div>
+	            <div class="input-group" style="width: 100%">
+	                <textarea style="width: 100%" id="garbo-output">Garbo Output</textarea>
+	            </div>
+	        </div>
+			</div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="input-group">
-                    <label class="sr-only" for="fen-input">FEN</label>
-                    <div class="input-group-addon">FEN</div>
-                    <input type="text" class="form-control" id="fen-input" placeholder="Input FEN">
-                </div>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <textarea style="width: 100%" id="garbo-output">Garbo Output</textarea>
-            </div>
-        </div>
-
 
     </div>
-    </div>
-
-
-
-
 </body>
 
 <script data-main="js/main" src="js/require.js"></script>
 
 </html>
-
